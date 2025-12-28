@@ -64,7 +64,7 @@ def extract_recently_played(limit=150):
                 "artist_id": track['artists'][0]['id'],
                 "artist_name": track['artists'][0]['name'],
                 "album_name": track['album']['name'],
-                # Novo: Capa
+                # Imagem do album
                 "album_image": track['album']['images'][0]['url'] if track['album']['images'] else None,
                 "release_date": track['album']['release_date']
             }
@@ -97,7 +97,7 @@ def enrich_artist_genres(df, sp):
 
     artist_genres = {}
 
-    # A API aceita buscar até 50 artistas de uma vez.
+    # A API só aceita buscar até 50 artistas de uma vez. Então, faz em lotes de 50.
     for i in range(0, len(artist_ids), 50):
         batch = artist_ids[i:i + 50]
         try:
