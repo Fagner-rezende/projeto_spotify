@@ -85,3 +85,14 @@ Explore os dados através das Views criadas.
 
 # 📞 Contato
 Desenvolvido por Fagner Rezende.
+
+
+---
+
+## 🔮 Melhorias Futuras
+
+Este projeto foi concebido como um MVP (Minimum Viable Product). Os próximos passos para evolução da arquitetura incluem:
+
+* **Orquestração:** Implementação do **Apache Airflow** para substituir a execução manual dos scripts e gerenciar dependências e retentativas (retries).
+* **Data Quality:** Adição de testes de dados com **Great Expectations** ou **Soda** para garantir a integridade do pipeline.
+* **Cloud:** Migração da infraestrutura Docker local para serviços gerenciados na nuvem (AWS RDS para o banco e ECS/Fargate para os containers).
