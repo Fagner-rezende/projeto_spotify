@@ -49,6 +49,7 @@ DB_HOST='127.0.0.1'
 DB_USER='root'
 DB_PASSWORD='SuaSenhaForteAqui'
 DB_NAME='spotify_db'
+```
 
 ## Subir a Infraestrutura (Docker)
 Execute o comando abaixo para iniciar os containers do MySQL e Metabase:
@@ -62,19 +63,28 @@ pip install -r requirements.txt
 ## Executar o Pipeline ETL
 Rode os scripts na ordem para atualizar os dados:
 
-# 1. Extração e Enriquecimento (Gera CSV na pasta /data)
+## 1. Extração e Enriquecimento (Gera CSV na pasta /data)
 python src/extract.py
 
-# 2. Carga no Banco de Dados (Lê o CSV mais recente e envia para o MySQL)
+## 2. Carga no Banco de Dados (Lê o CSV mais recente e envia para o MySQL)
 python src/load.py
 
 ## 📊 Estrutura de Análise (SQL Views)
 Após a carga, as seguintes Views são criadas no banco para facilitar a análise:
 
-View                             Descrição
-vw_top_artists            Ranking de artistas mais ouvidos por tempo e quantidade de plays.vw_top_tracks             As músicas favoritas, agrupadas por artista e álbum.vw_daily_activity         Mapa de calor de atividade (Plays por Hora do Dia e Período).vw_explicit_content       Percentual de consumo de conteúdo explícito vs. limpo.
+| View | Descrição |
+|------|-----------|
+| `vw_top_artists` | Ranking de artistas mais ouvidos por tempo e quantidade de plays. |
+| `vw_top_tracks` | As músicas favoritas, agrupadas por artista e álbum. |
+| `vw_daily_activity` | Mapa de calor de atividade (Plays por Hora do Dia e Período). |
+| `vw_explicit_content` | Percentual de consumo de conteúdo explícito vs. limpo. |
+
 
 ## 📈 Visualização (Metabase)
+
+Aqui está o resultado final do Dashboard gerado com os dados processados:
+
+![Dashboard Final](dashboard.png)
 
 Acesse http://localhost:3000.
 
@@ -83,16 +93,33 @@ Conecte o banco de dados MySQL usando o host: db e porta: 3306.
 Explore os dados através das Views criadas.
 
 
-# 📞 Contato
-Desenvolvido por Fagner Rezende.
+## 📞 Contato
+**Fagner Rezende**  
+Engenharia de Dados | Python | SQL | ETL | Analytics  
+
+📧 Email: fagner_rezende@hotmail.com  
+💼 LinkedIn: https://www.linkedin.com/in/fagnerabrezende  
+🐙 GitHub: https://github.com/Fagner-rezende
 
 
 ---
 
 ## 🔮 Melhorias Futuras
 
-Este projeto foi concebido como um MVP (Minimum Viable Product). Os próximos passos para evolução da arquitetura incluem:
+Este projeto foi desenvolvido como um **MVP**, com foco em clareza arquitetural e boas práticas de Engenharia de Dados.  
+Os próximos passos para evolução incluem:
 
-* **Orquestração:** Implementação do **Apache Airflow** para substituir a execução manual dos scripts e gerenciar dependências e retentativas (retries).
-* **Data Quality:** Adição de testes de dados com **Great Expectations** ou **Soda** para garantir a integridade do pipeline.
-* **Cloud:** Migração da infraestrutura Docker local para serviços gerenciados na nuvem (AWS RDS para o banco e ECS/Fargate para os containers).
+- **Orquestração e Automação**
+  - Implementação do **Apache Airflow** para orquestrar o pipeline, gerenciar dependências entre tarefas, agendamentos e políticas de retentativa (retries).
+
+- **Data Quality e Confiabilidade**
+  - Inclusão de testes automatizados de qualidade de dados com **Great Expectations** ou **Soda**, garantindo integridade, consistência e confiabilidade das informações.
+
+- **Observabilidade**
+  - Adição de logs estruturados, métricas e alertas para monitoramento do pipeline e identificação proativa de falhas.
+
+- **Cloud e Escalabilidade**
+  - Migração da infraestrutura local para a nuvem, utilizando serviços gerenciados como **AWS RDS** para o banco de dados e **ECS/Fargate** para execução dos containers.
+
+- **Segurança**
+  - Gerenciamento de segredos com **AWS Secrets Manager** ou **Parameter Store**, eliminando credenciais sensíveis em arquivos locais.
