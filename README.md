@@ -104,22 +104,19 @@ Engenharia de Dados | Python | SQL | ETL | Analytics
 
 ---
 
-## 🔮 Melhorias Futuras
+## 🔮 Roadmap e Melhorias Futuras
 
-Este projeto foi desenvolvido como um **MVP**, com foco em clareza arquitetural e boas práticas de Engenharia de Dados.  
-Os próximos passos para evolução incluem:
+Este projeto se trata de um "MVP" está em evolução contínua. Baseado em Code Reviews de engenharia sênior, o seguinte roadmap foi desenhado para as próximas versões (v2.0):
 
-- **Orquestração e Automação**
-  - Implementação do **Apache Airflow** para orquestrar o pipeline, gerenciar dependências entre tarefas, agendamentos e políticas de retentativa (retries).
-
-- **Data Quality e Confiabilidade**
-  - Inclusão de testes automatizados de qualidade de dados com **Great Expectations** ou **Soda**, garantindo integridade, consistência e confiabilidade das informações.
-
-- **Observabilidade**
-  - Adição de logs estruturados, métricas e alertas para monitoramento do pipeline e identificação proativa de falhas.
-
-- **Cloud e Escalabilidade**
-  - Migração da infraestrutura local para a nuvem, utilizando serviços gerenciados como **AWS RDS** para o banco de dados e **ECS/Fargate** para execução dos containers.
-
-- **Segurança**
-  - Gerenciamento de segredos com **AWS Secrets Manager** ou **Parameter Store**, eliminando credenciais sensíveis em arquivos locais.
+1.  **Arquitetura Medalhão (Medallion Architecture):**
+    * Estruturação do Data Lake em camadas:
+        * **Bronze:** Dados brutos (Raw JSON) da API.
+        * **Silver:** Dados limpos, deduplicados e com tipagem validada.
+        * **Gold:** Tabelas agregadas e Views de negócio prontas para o BI (Metabase).
+2.  **Orquestração e Automação:**
+    * Implementação do **Apache Airflow** para substituir a execução manual dos scripts, permitindo agendamento (CRON) e gestão de dependências.
+3.  **Data Quality & Observabilidade:**
+    * Implementação de testes de contrato de dados (Great Expectations) para garantir integridade.
+    * Centralização de logs (ELK Stack ou CloudWatch) para monitoramento de falhas em tempo real.
+4.  **Infraestrutura:**
+    * Migração do DDL para ferramentas de versionamento de banco de dados como **Alembic** ou **Flyway**.
